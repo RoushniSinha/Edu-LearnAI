@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu-LearnAI - AI-Powered Course Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-graduation-cap"></i> Edu-LearnAI</h1>
+            <p class="subtitle">AI-Powered Educational Content Generator</p>
+        </header>
+
+        <main class="main-content">
+            <div class="input-section">
+                <div class="form-container">
+                    <label for="courseTitle" class="form-label">
+                        <i class="fas fa-book"></i> Course Title
+                    </label>
+                    <input 
+                        type="text" 
+                        id="courseTitle" 
+                        class="course-input" 
+                        placeholder="Enter your course title (e.g., Introduction to Machine Learning)"
+                        maxlength="200"
+                    >
+                    <div class="api-key-container">
+                        <label for="apiKey" class="form-label">
+                            <i class="fas fa-key"></i> OpenAI API Key
+                        </label>
+                        <input 
+                            type="password" 
+                            id="apiKey" 
+                            class="api-input" 
+                            placeholder="Enter your OpenAI API key"
+                        >
+                        <small class="api-note">Your API key is stored locally and never sent to our servers</small>
+                    </div>
+                    <button id="generateBtn" class="generate-btn">
+                        <i class="fas fa-magic"></i> Generate Course Content
+                    </button>
+                </div>
+            </div>
+
+            <div id="loadingState" class="loading-state hidden">
+                <div class="loading-spinner"></div>
+                <p>Generating your educational content...</p>
+                <small>This may take 30-60 seconds</small>
+            </div>
+
+            <div id="resultsSection" class="results-section hidden">
+                <div class="results-header">
+                    <h2><i class="fas fa-clipboard-list"></i> Generated Course Content</h2>
+                    <button id="copyAllBtn" class="copy-btn">
+                        <i class="fas fa-copy"></i> Copy All Content
+                    </button>
+                </div>
+
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Important:</strong> This content is AI-generated and should be critically evaluated, fact-checked, and customized for your specific educational context before use.
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-target"></i> Course Objective</h3>
+                            <button class="copy-section-btn" data-section="objective">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div id="courseObjective" class="content-text"></div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-list-ol"></i> Course Syllabus</h3>
+                            <button class="copy-section-btn" data-section="syllabus">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div id="courseSyllabus" class="content-text"></div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-brain"></i> Learning Outcomes (Bloom's Taxonomy)</h3>
+                            <button class="copy-section-btn" data-section="outcomes">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div id="learningOutcomes" class="content-text">
+                            <div class="outcome-category">
+                                <h4><i class="fas fa-book-open"></i> Knowledge</h4>
+                                <div id="knowledgeOutcome"></div>
+                            </div>
+                            <div class="outcome-category">
+                                <h4><i class="fas fa-lightbulb"></i> Comprehension</h4>
+                                <div id="comprehensionOutcome"></div>
+                            </div>
+                            <div class="outcome-category">
+                                <h4><i class="fas fa-cogs"></i> Application</h4>
+                                <div id="applicationOutcome"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clipboard-check"></i> Suggested Assessments</h3>
+                            <button class="copy-section-btn" data-section="assessments">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div id="suggestedAssessments" class="content-text"></div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-book-reader"></i> Recommended Readings</h3>
+                            <button class="copy-section-btn" data-section="readings">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div id="recommendedReadings" class="content-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="errorState" class="error-state hidden">
+                <div class="error-content">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Error Generating Content</h3>
+                    <p id="errorMessage"></p>
+                    <button id="retryBtn" class="retry-btn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Edu-LearnAI. Powered by OpenAI GPT.</p>
+        </footer>
+    </div>
+
+    <div id="copyNotification" class="copy-notification hidden">
+        <i class="fas fa-check-circle"></i> Content copied to clipboard!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
